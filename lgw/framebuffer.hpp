@@ -21,7 +21,7 @@ namespace lgw {
 
 		public:
 			virtual void clear(T) = 0;
-			virtual void init(T) = 0;
+			virtual void init(T) {};
 			virtual void draw(size_t, size_t, T) = 0;
 			virtual T& read(size_t, size_t) = 0;
 			virtual T* get_buffer() = 0;
@@ -32,13 +32,15 @@ namespace lgw {
 	 *  \brief A 32-bit color pixel framebuffer
 	 */
 	template <size_t W, size_t H> class framebuffer : public detail::framebuffer<uint32_t, W, H> {
+		typedef std::array <uint32_t, W * H> buf_t;
+
 		uint32_t dummy = 0;
 
 		buf_t buf;
 
 	public:
 		framebuffer() = default;
-		framebuffer(uint32_t color) { init(c); }
+		framebuffer(uint32_t color) { clear(color); }
 
 		/**
 		 *  \brief Clear the framebuffer, and fill with the specified color
@@ -59,7 +61,7 @@ namespace lgw {
 		void draw(size_t x, size_t y, uint32_t color) override {
 			size_t index = x + (y * W);
 
-			if (index > m_buf.size()) return;
+			if (index >= buf.size()) return;
 
 			buf[index] = color;
 		}
@@ -73,7 +75,7 @@ namespace lgw {
 		uint32_t& read(size_t x, size_t y) override {
 			size_t index = x + (y * W);
 
-			if (index > m_buf.size()) return dummy;
+			if (index > buf.size()) return dummy;
 
 			return buf.at(index);
 		}
