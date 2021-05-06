@@ -62,11 +62,11 @@ namespace lgw {
 	 *  \param g Color's green component
 	 *  \param b Color's blue component
 	 */
-	inline uint32_t rgb(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 0xff) {
-		return (a << detail::conv_alpha_shift) |
-               (r << detail::conv_red_shift)   |
-               (g << detail::conv_green_shift) |
-               (b << detail::conv_blue_shift);
+	template <class T> inline uint32_t rgb(T r, T g, T b, T a = (T)0xff) {
+		return ((uint8_t)a << detail::conv_alpha_shift) |
+               ((uint8_t)r << detail::conv_red_shift)   |
+               ((uint8_t)g << detail::conv_green_shift) |
+               ((uint8_t)b << detail::conv_blue_shift);
 	}
 	
 	/**
@@ -74,10 +74,10 @@ namespace lgw {
 	 *  
 	 *  \param y Color's grayscale value
 	 */
-	inline uint32_t rgb(uint8_t y, uint8_t a = 0xff) {
-        return (a << detail::conv_alpha_shift) |
-               (y << detail::conv_red_shift)   |
-               (y << detail::conv_green_shift) |
-               (y << detail::conv_blue_shift);
+	template <class T> inline uint32_t rgb(T y, T a = (T)0xff) {
+        return ((uint8_t)a << detail::conv_alpha_shift) |
+               ((uint8_t)y << detail::conv_red_shift)   |
+               ((uint8_t)y << detail::conv_green_shift) |
+               ((uint8_t)y << detail::conv_blue_shift);
 	}
 }
