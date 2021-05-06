@@ -1,2 +1,2 @@
 install:
-	@sudo cp -r lgw/ /usr/include
+	sudo cp -r lgw/ /usr/include
