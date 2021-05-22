@@ -22,7 +22,7 @@ namespace lgw {
         static const size_t
             conv_red_shift   = 24,
             conv_green_shift = 16,
-            conv_blue_shift  = 8
+            conv_blue_shift  = 8,
             conv_alpha_shift = 0;
 #endif
     }
